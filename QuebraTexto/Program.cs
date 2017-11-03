@@ -6,16 +6,16 @@ namespace QuebraTexto
     class Program
     {
         static void Main(string[] args)
-        {
-            
-            string arqIn = "";
-            int x = 0;
-            string texto = "";
-            bool arqExiste = false;
-            Console.WriteLine("Digite o caminho do arquivo: ");
+        {           
+            var arqIn = "";
+            var arqOut = "";
+            var x = 0;
+            var texto = "";
+            var arqExiste = false;
+            //Console.WriteLine("Digite o caminho do arquivo: ");
             while (arqExiste == false)
-            { 
-                arqIn = @"d:\dev\projetos\" + Console.ReadLine();
+            {
+                arqIn = @"D:\Dev\Projetos\QuebraTexto\in2.txt";// + Console.ReadLine();
                 if (File.Exists(arqIn))
                 {
                     arqExiste = true;
@@ -30,31 +30,51 @@ namespace QuebraTexto
                 x = Convert.ToInt32(sr.ReadLine());
                 texto = sr.ReadLine();
                 Console.WriteLine(texto);
-                int c = texto.Length;
-                int i = 0;
-                int f = x;
-                int l = 0;
-                string linha;
-                while (c != l)
-                {                   
-                    while(!texto.Substring(i , f).EndsWith(" "))
+                var inicio = 0;
+                var fim = x;
+                var tamanho = 0;
+                var resto = texto;
+                var linha = "";
+                var condicao = false;
+                var palavra = texto.Split(' ')[0];
+                Console.WriteLine(palavra);
+                //Console.WriteLine("Onde deseja salvar o arquivo de origem? ");
+                arqOut = @"D:\Dev\Projetos\QuebraTexto\out.txt"; //Console.ReadLine() + @"\out.txt";
+                using (StreamWriter sw = new StreamWriter(arqOut))
+                {
+                    while (!condicao)
                     {
-                        f--;
+                        if (resto.Length >= fim)
+                        {
+                            if(fim > palavra.Length)
+                            {
+                                while (!texto.Substring(inicio, fim).EndsWith(" "))
+                                {
+                                    fim--;
+                                }
+                                linha = texto.Substring(inicio, fim);
+                                tamanho = linha.Length;
+                                inicio = inicio + tamanho;
+                                resto = texto.Substring(inicio);
+                                fim = x + 1;
+                                sw.WriteLine(linha);
+                                continue;
+                            }
+                            else
+                            {
+                                string[] parte = texto.Split(' ');
+                                foreach (string p in parte)
+                                {
+                                    sw.WriteLine(p);
+                                } 
+                            }
+                        }
+                        sw.WriteLine(resto);
+                        sr.Close();
+                        condicao = true;
                     }
-                    linha = texto.Substring(i, f);
-                    int t = linha.Length;
-                    Console.WriteLine(linha);
-                    i = i + t;
-                    f = x + 1;
-                    l = l + t;
-                    int rest = c - l;
-                }
-                Console.Read();
+                }                
             }
-
-
-
-
         }
     }
 }
