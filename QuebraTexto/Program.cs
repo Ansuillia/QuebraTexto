@@ -15,7 +15,7 @@ namespace QuebraTexto
             //Console.WriteLine("Digite o caminho do arquivo: ");
             while (arqExiste == false)
             {
-                arqIn = @"D:\Dev\Projetos\QuebraTexto\in2.txt";// + Console.ReadLine();
+                arqIn = @"D:\Dev\Projetos\QuebraTexto\in.txt";// + Console.ReadLine();
                 if (File.Exists(arqIn))
                 {
                     arqExiste = true;
@@ -42,12 +42,14 @@ namespace QuebraTexto
                 arqOut = @"D:\Dev\Projetos\QuebraTexto\out.txt"; //Console.ReadLine() + @"\out.txt";
                 using (StreamWriter sw = new StreamWriter(arqOut))
                 {
+                    var teste = false;
                     while (!condicao)
                     {
                         if (resto.Length >= fim)
                         {
                             if(fim > palavra.Length)
                             {
+                                teste = true;
                                 while (!texto.Substring(inicio, fim).EndsWith(" "))
                                 {
                                     fim--;
@@ -69,7 +71,10 @@ namespace QuebraTexto
                                 } 
                             }
                         }
-                        sw.WriteLine(resto);
+                        if(teste == true)
+                        {
+                            sw.WriteLine(resto);
+                        }  
                         sr.Close();
                         condicao = true;
                     }
