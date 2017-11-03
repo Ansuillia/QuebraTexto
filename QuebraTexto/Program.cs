@@ -12,10 +12,10 @@ namespace QuebraTexto
             var x = 0;
             var texto = "";
             var arqExiste = false;
-            //Console.WriteLine("Digite o caminho do arquivo: ");
+            Console.WriteLine("Digite o caminho do arquivo: ");
             while (arqExiste == false)
             {
-                arqIn = @"D:\Dev\Projetos\QuebraTexto\in.txt";// + Console.ReadLine();
+                arqIn = Console.ReadLine();
                 if (File.Exists(arqIn))
                 {
                     arqExiste = true;
@@ -29,7 +29,6 @@ namespace QuebraTexto
             {
                 x = Convert.ToInt32(sr.ReadLine());
                 texto = sr.ReadLine();
-                Console.WriteLine(texto);
                 var inicio = 0;
                 var fim = x;
                 var tamanho = 0;
@@ -37,9 +36,8 @@ namespace QuebraTexto
                 var linha = "";
                 var condicao = false;
                 var palavra = texto.Split(' ')[0];
-                Console.WriteLine(palavra);
-                //Console.WriteLine("Onde deseja salvar o arquivo de origem? ");
-                arqOut = @"D:\Dev\Projetos\QuebraTexto\out.txt"; //Console.ReadLine() + @"\out.txt";
+                Console.WriteLine("Onde deseja salvar o arquivo de origem? ");
+                arqOut = Console.ReadLine() + @"\out.txt";
                 using (StreamWriter sw = new StreamWriter(arqOut))
                 {
                     var teste = false;
